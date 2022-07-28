@@ -68,11 +68,11 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guacamoleRecipe.setDirections("dmsmdlsnnssm");
         Notes guacNote = new Notes();
         guacNote.setRecipeNotes("Is very very EASY....NOOOO!!!!");
-        guacNote.setRecipe(guacamoleRecipe);
+        //guacNote.setRecipe(guacamoleRecipe);
 
         guacamoleRecipe.setNote(guacNote);
-        guacamoleRecipe.getIngredients().add(new Ingredient("ripe avocados", new BigDecimal(2),eachMeasure,guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("no saber que poner", new BigDecimal(3),tableMeasure, guacamoleRecipe));
+        guacamoleRecipe.addIngredient(new Ingredient("ripe avocados", new BigDecimal(2),eachMeasure));
+        guacamoleRecipe.addIngredient(new Ingredient("no saber que poner", new BigDecimal(3),tableMeasure));
         guacamoleRecipe.getCategories().add(americanCategory);
 
         Recipe pizzaRecipe = new Recipe();
@@ -85,10 +85,10 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         pizzaRecipe.setDirections("1.Masa grande estirada y no se que mas poner");
         Notes italNote = new Notes();
         italNote.setRecipeNotes("Tiene pocos ingredientes");
-        italNote.setRecipe(pizzaRecipe);
+       // italNote.setRecipe(pizzaRecipe);
         pizzaRecipe.setNote(italNote);
-        pizzaRecipe.getIngredients().add(new Ingredient("ripe avocados", new BigDecimal(2),eachMeasure, pizzaRecipe));
-        pizzaRecipe.getIngredients().add(new Ingredient("no saber que poner", new BigDecimal(3),tableMeasure, pizzaRecipe));
+        pizzaRecipe.addIngredient(new Ingredient("ripe avocados", new BigDecimal(2),eachMeasure));
+        pizzaRecipe.addIngredient(new Ingredient("no saber que poner", new BigDecimal(3),tableMeasure));
 
 
 
