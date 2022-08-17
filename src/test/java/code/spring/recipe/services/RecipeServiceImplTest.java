@@ -11,7 +11,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 class RecipeServiceImplTest {
@@ -29,28 +30,28 @@ class RecipeServiceImplTest {
 
     @Test
     void getRecipeTest() {
-        Recipe recipe = new Recipe();
-        HashSet recipeData = new HashSet();
+        final Recipe recipe = new Recipe();
+        final HashSet recipeData = new HashSet();
         recipeData.add(recipe);
 
-        when(recipeRepository.findAll()).thenReturn(recipeData);
-        Set<Recipe> recipes = recipeService.getRecipe();
+        when(this.recipeRepository.findAll()).thenReturn(recipeData);
+        final Set<Recipe> recipes = this.recipeService.getRecipe();
 
         assertEquals(recipes.size(), 1);
         //estamos diciendo que se llame al repositorio una sola vez
-        verify(recipeRepository, times(1)).findAll();
+        verify(this.recipeRepository, times(1)).findAll();
                 
     }
 
     @Test
     void getRecipeIdTest(){
-        Recipe recipe= new Recipe();
+        final Recipe recipe= new Recipe();
         recipe.setId(1L);
-        Optional<Recipe> recipeOptional = Optional.of(recipe);
+        final Optional<Recipe> recipeOptional = Optional.of(recipe);
 
-        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+        when(this.recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
 
-        Recipe recipeReturned = recipeService.findById(1L);
+        final Recipe recipeReturned = this.recipeService.findById(1L);
 
         assertNotNull(recipeReturned);
     }
@@ -58,14 +59,23 @@ class RecipeServiceImplTest {
     @Test
     void deleteRecipeTest(){
         //given
-        Long idToDelete = Long.valueOf(2L);
+        final Long idToDelete = Long.valueOf(2L);
         //when
-        recipeService.deleteById(idToDelete);
+        this.recipeService.deleteById(idToDelete);
 
         //no se utiliza when porque no retorna nada
         //then
-        verify(recipeRepository, times(1)).deleteById(anyLong());
+        verify(this.recipeRepository, times(1)).deleteById(anyLong());
     }
+
+    @Test
+    public void getRecipeByIdTestNotFound() throws Exception {
+
+        final Optional <Recipe> recipeOptional = Optional.empty();
+        when(this.recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+        final Recipe recipeReturned = this.recipeService.findById(1L);
+    }
+
 
 
 }
